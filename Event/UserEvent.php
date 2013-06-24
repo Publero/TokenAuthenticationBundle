@@ -18,7 +18,7 @@ class UserEvent extends Event
     {
         if (!($user instanceof UserInterface || is_string($user))) {
             throw new \InvalidArgumentException(sprintf(
-                'User must be either instance of UserInterface or a string (username), % given',
+                'User must be either instance of UserInterface or a string (username), %s given',
                 gettype($user)
             ));
         }
