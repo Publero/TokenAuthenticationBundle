@@ -25,6 +25,8 @@
         "doctrine/doctrine-bundle": "Needed when using the ORM for access token storage",
         "doctrine/mongodb-odm-bundle": "Needed when using the ODM for access token storage"
     },
+    "
+    "target-dir": "Publero/TokenAuthenticationBundle",
     "autoload": {
         "psr-0": { "Publero\\TokenAuthenticationBundle": "" }
     }
