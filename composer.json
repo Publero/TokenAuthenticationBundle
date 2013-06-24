@@ -1,5 +1,5 @@
 {
-    "name": "publero-token-authentication-bundle",
+    "name": "publero/token-authentication-bundle",
     "type": "symfony-bundle",
     "description": "Symfony PubleroTokenAuthenticationBundle",
     "keywords": ["authentication", "access token", "stateless"],
