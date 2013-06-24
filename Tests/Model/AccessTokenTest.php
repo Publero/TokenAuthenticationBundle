@@ -46,7 +46,7 @@ class AccessTokenTest extends \PHPUnit_Framework_TestCase
     {
         $role = 'ROLE_TEST';
         $accessToken = new AccessToken();
-        $accessToken->setRoles(['test.role.index' => $role]);
+        $accessToken->setRoles(array('test.role.index' => $role));
 
         $this->assertEquals(array($role), $accessToken->getRoles());
     }
