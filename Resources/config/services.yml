@@ -1,0 +1,31 @@
+parameters:
+    publero_token_authentication.access_token_manager.class: Publero\TokenAuthenticationBundle\Model\AccessTokenManager
+    publero_token_authentication.security.authentication.provider.access_token.class: Publero\TokenAuthenticationBundle\Security\Core\Authentication\Provider\AccessTokenProvider
+    publero_token_authentication.security.authentication.listener.access_token.class: Publero\TokenAuthenticationBundle\Security\Http\Firewall\AccessTokenListener
+    publero_token_authentication.access_token_generator.class: Publero\Component\CodeGenerator\CustomAlphabetCodeGenerator
+
+services:
+    publero_token_authentication.access_token_manager:
+        class: '%publero_token_authentication.access_token_manager.class%'
+        arguments:
+            - '@publero_token_authentication.object_manager'
+            - '@publero_token_authentication.access_token_generator'
+            - '%publero_token_authentication.access_token_class%'
+
+    publero_token_authentication.security.authentication.provider.access_token:
+        class: '%publero_token_authentication.security.authentication.provider.access_token.class%'
+        arguments: [ ~, '@publero_token_authentication.access_token_manager' ]
+        public: false
+        abstract: true
+
+    publero_token_authentication.security.authentication.listener.access_token:
+        class: '%publero_token_authentication.security.authentication.listener.access_token.class%'
+        arguments: [ '@security.context', '@security.authentication.manager' ]
+        public: false
+        abstract: true
+
+    publero_token_authentication.access_token_generator:
+        class: '%publero_token_authentication.access_token_generator.class%'
+        calls:
+            - [ 'setLength', [ '%publero_token_authentication.access_token_lenght%' ] ]
+        public: false

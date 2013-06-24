@@ -1,0 +1,20 @@
+Publero\TokenAuthenticationBundle\Model\AccessToken:
+    type: mappedSuperclass
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        token:
+            type: string
+            unique: true
+        roles:
+            type: array
+        created:
+            type: datetime
+        expires:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
