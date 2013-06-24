@@ -23,7 +23,7 @@ class AccessToken
     /**
      * @var array
      */
-    protected $roles;
+    protected $roles = array();
 
     /**
      * @var \DateTime

@@ -1,3 +1,4 @@
 composer.lock
 Tests/autoload.php
 vendor/*
+.idea/
