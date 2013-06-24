@@ -1,6 +1,8 @@
 PubleroTokenAuthenticationBundle
 ================================
 
+[![Build Status](https://travis-ci.org/Publero/TokenAuthenticationBundle.png?branch=master)](https://travis-ci.org/Publero/TokenAuthenticationBundle)
+
 The PubleroTokenAuthenticationBundle adds support for access token authentication in Symfony2.
 
 Documentation
