@@ -16,7 +16,8 @@
         "php": ">=5.3.2",
         "publero/code-generator": "dev-master",
         "symfony/framework-bundle": "~2.3",
-        "symfony/security-bundle": "~2.3"
+        "symfony/security-bundle": "~2.3",
+        "friendsofsymfony/oauth2-php": "1.0.5"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "*",

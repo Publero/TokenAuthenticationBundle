@@ -1,6 +1,7 @@
 <?php
 namespace Publero\TokenAuthenticationBundle\Security\Http\Firewall;
 
+use OAuth2\OAuth2;
 use Publero\TokenAuthenticationBundle\Event\UserEvent;
 use Publero\TokenAuthenticationBundle\PubleroTokenAuthenticationEvents;
 use Publero\TokenAuthenticationBundle\Security\Core\Authentication\Token\AccessTokenUserToken;
@@ -13,8 +14,6 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 class AccessTokenListener implements ListenerInterface
 {
-    const AUTHENTICATION_TYPE = 'access_token';
-
     /**
      * @var SecurityContextInterface
      */
@@ -25,19 +24,23 @@ class AccessTokenListener implements ListenerInterface
      */
     private $authenticationManager;
 
-    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
+    /**
+     * @var OAuth2
+     */
+    private $oauth;
+
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, OAuth2 $oauth)
     {
         $this->securityContext = $securityContext;
         $this->authenticationManager = $authenticationManager;
+        $this->oauth = $oauth;
     }
 
     public function handle(GetResponseEvent $event)
     {
-        $accessToken = $event->getRequest()->headers->get('Authorization', null);
-        if ($accessToken === null || strpos($accessToken, self::AUTHENTICATION_TYPE) !== 0) {
+        if (null === $accessToken = $this->oauth->getBearerToken($event->getRequest(), true)) {
             return;
         }
-        $accessToken = substr($accessToken, strlen(self::AUTHENTICATION_TYPE) + 1);
 
         $userToken = new AccessTokenUserToken();
         $userToken->setAccessToken($accessToken);

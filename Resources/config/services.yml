@@ -3,6 +3,8 @@ parameters:
     publero_token_authentication.security.authentication.provider.access_token.class: Publero\TokenAuthenticationBundle\Security\Core\Authentication\Provider\AccessTokenProvider
     publero_token_authentication.security.authentication.listener.access_token.class: Publero\TokenAuthenticationBundle\Security\Http\Firewall\AccessTokenListener
     publero_token_authentication.access_token_generator.class: Publero\Component\CodeGenerator\CustomAlphabetCodeGenerator
+    publero_token_authentication.oauth.class: OAuth2\OAuth2
+    publero_token_authentication.oauth_storage.class: OAuth2\OAuth2StorageStub
 
 services:
     publero_token_authentication.access_token_manager:
@@ -28,4 +30,13 @@ services:
         class: '%publero_token_authentication.access_token_generator.class%'
         calls:
             - [ 'setLength', [ '%publero_token_authentication.access_token_lenght%' ] ]
+        public: false
+
+    publero_token_authentication.oauth:
+        class: '%publero_token_authentication.oauth.class%'
+        arguments: [ '@publero_token_authentication.oauth_storage' ]
+        public: false
+
+    publero_token_authentication.oauth_storage:
+        class: '%publero_token_authentication.oauth_storage.class%'
         public: false
