@@ -22,7 +22,10 @@ services:
 
     publero_token_authentication.security.authentication.listener.access_token:
         class: '%publero_token_authentication.security.authentication.listener.access_token.class%'
-        arguments: [ '@security.context', '@security.authentication.manager' ]
+        arguments:
+          - '@security.context'
+          - '@security.authentication.manager'
+          - '@publero_token_authentication.oauth'
         public: false
         abstract: true
 
