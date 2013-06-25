@@ -10,6 +10,17 @@ class AccessTokenUserToken extends AbstractToken
      */
     private $accessToken;
 
+    /**
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param $accessToken
+     */
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;

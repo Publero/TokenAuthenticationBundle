@@ -28,11 +28,15 @@ class AccessTokenProvider implements AuthenticationProviderInterface
 
     public function authenticate(TokenInterface $token)
     {
-        if ($token->getCredentials() === null) {
-            return;
+        if (!$this->supports($token)) {
+            return null;
         }
 
-        $accessToken = $this->accessTokenManager->findAccessToken($token->getCredentials());
+        if ($token->getCredentials() === null) {
+            return null;
+        }
+
+        $accessToken = $this->accessTokenManager->findAccessToken($token->getAccessToken());
 
         if ($accessToken === null || !$accessToken->isValid()) {
             throw new AuthenticationException('Invalid access token.');
