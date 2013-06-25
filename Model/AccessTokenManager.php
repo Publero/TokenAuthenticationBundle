@@ -53,10 +53,9 @@ class AccessTokenManager implements AccessTokenManagerInterface
             }
         }
 
-        $accessTokenRepository = $this->om->getRepository($this->accessTokenClass);
         do {
             $token = $this->generator->generate();
-        } while ($accessTokenRepository->findOneByToken($token) !== null);
+        } while ($this->findAccessToken($token) !== null);
 
         $class = $this->accessTokenClass;
         $accessToken = new $class();
