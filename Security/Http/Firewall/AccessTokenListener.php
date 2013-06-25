@@ -13,6 +13,8 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 class AccessTokenListener implements ListenerInterface
 {
+    const AUTHENTICATION_TYPE = 'access_token';
+
     /**
      * @var SecurityContextInterface
      */
@@ -31,10 +33,11 @@ class AccessTokenListener implements ListenerInterface
 
     public function handle(GetResponseEvent $event)
     {
-        $accessToken = $event->getRequest()->headers->get('Authentication', null);
-        if ($accessToken === null) {
+        $accessToken = $event->getRequest()->headers->get('Authorization', null);
+        if ($accessToken === null || strpos($accessToken, self::AUTHENTICATION_TYPE) === 0) {
             return;
         }
+        $accessToken = substr($accessToken, strlen(self::AUTHENTICATION_TYPE) + 1);
 
         $userToken = new AccessTokenUserToken();
         $userToken->setAccessToken($accessToken);
