@@ -4,7 +4,6 @@ namespace Publero\TokenAuthenticationBundle\Tests\Model;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Publero\Component\CodeGenerator\CodeGeneratorInterface;
-use Publero\TokenAuthenticationBundle\Model\AccessToken;
 use Publero\TokenAuthenticationBundle\Model\AccessTokenManager;
 use Symfony\Component\Security\Core\User\User;
 
