@@ -34,7 +34,7 @@ class AccessTokenListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         $accessToken = $event->getRequest()->headers->get('Authorization', null);
-        if ($accessToken === null || strpos($accessToken, self::AUTHENTICATION_TYPE) === 0) {
+        if ($accessToken === null || strpos($accessToken, self::AUTHENTICATION_TYPE) !== 0) {
             return;
         }
         $accessToken = substr($accessToken, strlen(self::AUTHENTICATION_TYPE) + 1);
