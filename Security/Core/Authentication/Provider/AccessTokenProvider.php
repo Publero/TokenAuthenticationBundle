@@ -28,11 +28,7 @@ class AccessTokenProvider implements AuthenticationProviderInterface
 
     public function authenticate(TokenInterface $token)
     {
-        if (!$this->supports($token)) {
-            return null;
-        }
-
-        if ($token->getCredentials() === null) {
+        if (!$this->supports($token) || $token->getAccessToken() === null) {
             return null;
         }
 
@@ -49,6 +45,7 @@ class AccessTokenProvider implements AuthenticationProviderInterface
 
         $roles = array_intersect($user->getRoles(), $accessToken->getRoles());
         $authenticatedToken = new AccessTokenUserToken($roles);
+        $authenticatedToken->setAccessToken($token->getAccessToken());
         $authenticatedToken->setUser($user);
         $authenticatedToken->setAuthenticated(true);
 
