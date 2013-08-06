@@ -46,7 +46,7 @@ class AccessTokenManager implements AccessTokenManagerInterface
         } else {
             $diff = array_diff($roles, $user->getRoles());
             if (count($diff) > 0) {
-                throw \IllegalArgumentException(sprintf('User "%s" can\'t be assigned roles: %s',
+                throw new \IllegalArgumentException(sprintf('User "%s" can\'t be assigned roles: %s',
                     $user->getUsername(),
                     implode(', ', $diff)
                 ));
